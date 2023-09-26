@@ -11,7 +11,7 @@ func message(texto string) (msg string, err error){
 	if mensagem == ""{
 		err := errors.New("ERROR")
 		//msg := "mensagem em branco favor informa a mensagem"
-		return "", err
+		return "Deu Erro", err
 	}
 	return mensagem, nil
 }
