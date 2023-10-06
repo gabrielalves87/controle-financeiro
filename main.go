@@ -13,6 +13,9 @@ import (
 func main() {
 	kubeconfigPath := os.Getenv("KUBECONFIG")
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfigPath)
+	if err != nil {
+	  panic(err)
+	}
 	mclient, err := monitoringclient.NewForConfig(config)
 	if err != nil {
 		panic(err)
