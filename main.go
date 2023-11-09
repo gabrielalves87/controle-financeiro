@@ -24,5 +24,5 @@ func main(){
 	vanilaComErro, err := message("")
 	fmt.Println(vanilaSemErro)
 	fmt.Println(vanilaComErro)
-	fmt.Println("Ola Mundo")
+	fmt.Println("Ola Mundo!")
 }
