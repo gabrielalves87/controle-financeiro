@@ -3,7 +3,6 @@ package database
 import (
 	"log"
 
-	model "github.com/gabrielalves87/controle-financeiro/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -20,7 +19,7 @@ func ConexaoComBancoDeDados() {
 		log.Panic("Error ao Conectar com o Banco de Dados")
 	}
 	// Crie as tabelas
-	err = DB.AutoMigrate(&model.User{}, &model.Categorie{}, &model.Account{})
+	err = DB.AutoMigrate(&models.User{}, &models.Categorie{}, &models.Account{})
 	if err != nil {
 		log.Fatalf("Failed to migrate database: %v", err)
 	}
