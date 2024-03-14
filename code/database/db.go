@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 
-	models "./models"
+	"github.com/gabrielalves87/controle-financeiro/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
