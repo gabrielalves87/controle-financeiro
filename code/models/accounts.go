@@ -20,5 +20,3 @@ type Account struct {
 	UpdatedAt    time.Time
 	DeletedAt    gorm.DeletedAt `gorm:"index"`
 }
-
-var Accounts []Account
