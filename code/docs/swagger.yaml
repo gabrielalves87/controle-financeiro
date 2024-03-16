@@ -1,0 +1,54 @@
+definitions:
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /alunos:
+    get:
+      consumes:
+      - application/json
+      description: do pinExibeTodosAlunosg
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ExibeTodosAlunos example
+      tags:
+      - ExibeTodosAlunos
+  /alunos/{name}:
+    get:
+      consumes:
+      - application/json
+      description: do Saudacao
+      parameters:
+      - description: Nome
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Saudacao example
+      tags:
+      - Saudacao
+swagger: "2.0"
