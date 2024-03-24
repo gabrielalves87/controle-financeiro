@@ -10,10 +10,10 @@ import (
 
 func Handlerequest() {
 	r := gin.Default()
-	r.GET("/alunos", controllers.ExibeTodosAlunos)
-	r.GET("/alunos/:nome", controllers.Saudacao)
 	docs.SwaggerInfo.BasePath = "/"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	r.GET("/alunos", controllers.ExibeTodosAlunos)
+	r.GET("/alunos/:nome", controllers.Saudacao)
 	r.POST("/user", controllers.CriaNovoUsuario)
 	r.POST("/categorie", controllers.CriaNovaCategoria)
 	r.Run("0.0.0.0:3000")
