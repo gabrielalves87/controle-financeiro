@@ -42,7 +42,7 @@ jobs:
         sudo mv migrate.linux-amd64 /usr/bin/migrate
         which migrate
     - name: Run migrations
-      run:  cd code;ls; make migrateup
+      run:  cd code; make migrateup
 
     - name: Run Test
       run:  cd code ;  make test
