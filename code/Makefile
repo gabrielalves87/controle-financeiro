@@ -16,6 +16,9 @@ migratedown:
 sqlcgenerate:
 	docker run --rm -v $(pwd):/src -w /src sqlc/sqlc generate
 
+test:
+	go test -v -cover ./...	
+
 swaggercreate:
 	swag init --parseDependency --parseInternal --parseDepth 1
 
