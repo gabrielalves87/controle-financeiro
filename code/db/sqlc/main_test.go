@@ -12,7 +12,7 @@ import (
 
 const (
 	dbDriver = "postgres"
-	dbSource = "postgresql://postgres:password@localhost:5432/go_finance?sslmode=disable"
+	dbSource = "postgresql://postgres:postgres@localhost:5432/go_finance?sslmode=disable"
 )
 
 var testQueries *Queries

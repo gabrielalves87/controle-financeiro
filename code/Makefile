@@ -1,11 +1,11 @@
 dockerup:
-	cd .. ; cd docker docker compose up 
+	cd .. ; cd docker ; docker compose up -d
 
 dockerdown:
-	cd .. ; cd docker docker compose down
+	cd .. ; cd docker ; docker compose down
 
 createdb:
-	docker exec -it postgres-db createdb --username=postgres --owner=postgres gofinance                                                                   ─╯
+	docker exec -it postgres-db createdb --username=postgres --owner=postgres go_finance                                                                   ─╯
 
 migrateup:
 	migrate -path db/migration -database "postgresql://postgres:postgres@localhost:5432/go_finance?sslmode=disable" -verbose up

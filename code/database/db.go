@@ -14,7 +14,7 @@ var (
 )
 
 func ConexaoComBancoDeDados() {
-	stringDeConexao := "host=192.168.8.157 user=postgres password=password dbname=gofinance port=5432 sslmode=disable TimeZone=America/Sao_Paulo"
+	stringDeConexao := "host=192.168.8.157 user=postgres password=postgres dbname=go_finance port=5432 sslmode=disable TimeZone=America/Sao_Paulo"
 	DB, err = gorm.Open(postgres.Open(stringDeConexao), &gorm.Config{TranslateError: true})
 	print(DB)
 	if err != nil {
@@ -33,7 +33,7 @@ func ConexaoComBancoDeDados() {
 	log.Println("Database migration successful")
 }
 func CriaUsuario(user *models.User) {
-	stringDeConexao := "host=192.168.8.157 user=postgres password=password dbname=gofinance port=5432 sslmode=disable TimeZone=America/Sao_Paulo"
+	stringDeConexao := "host=192.168.8.157 user=postgres password=postgres dbname=go_finance port=5432 sslmode=disable TimeZone=America/Sao_Paulo"
 	DB, err := gorm.Open(postgres.Open(stringDeConexao), &gorm.Config{TranslateError: true})
 	if err != nil {
 		log.Fatalf("Failed to create user: %v", err)
