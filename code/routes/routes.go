@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/gabrielalves87/controle-financeiro/controllers"
 	"github.com/gin-gonic/gin"
+    "log"
 	docs "github.com/gabrielalves87/controle-financeiro/docs"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -16,5 +17,8 @@ func Handlerequest() {
 	r.GET("/alunos/:nome", controllers.Saudacao)
 	r.POST("/user", controllers.CriaNovoUsuario)
 	r.POST("/categorie", controllers.CriaNovaCategoria)
-	r.Run("0.0.0.0:3000")
+	err := r.Run("0.0.0.0:3000")
+	if err != nil {
+		log.Fatalf("Failed to run server: %v", err)
+	}
 }
