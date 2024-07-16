@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"log"
+
 	"github.com/gabrielalves87/controle-financeiro/controllers"
 	docs "github.com/gabrielalves87/controle-financeiro/docs"
 	"github.com/gin-gonic/gin"
@@ -16,9 +18,8 @@ func Handlerequest() {
 	r.GET("/alunos/:nome", controllers.Saudacao)
 	r.POST("/user", controllers.CriaNovoUsuario)
 	r.POST("/categorie", controllers.CriaNovaCategoria)
-	r.Run("0.0.0.0:3000")
-	// err := r.Run("0.0.0.0:3000")
-	// if err != nil {
-	// 	log.Fatalf("Failed to run server: %v", err)
-	// }
+	err := r.Run("0.0.0.0:3000")
+	if err != nil {
+		log.Fatalf("Failed to run server: %v", err)
+	}
 }
