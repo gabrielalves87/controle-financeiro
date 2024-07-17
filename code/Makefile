@@ -22,4 +22,7 @@ test:
 swaggercreate:
 	swag init --parseDependency --parseInternal --parseDepth 1
 
-.PHONE:  createdb  migrateup migratedown dockerup sqlcgenerate
+server:
+	go run main.go
+
+.PHONE:  createdb  migrateup migratedown dockerup sqlcgenerate server

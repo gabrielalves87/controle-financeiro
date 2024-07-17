@@ -15,14 +15,14 @@ func NewServer(store *db.SQLStore) *Server{
 
 	router.POST("/user", server.createUser)
 	router.GET("/user/:username", server.getUser)
-	router.GET("/user/:id", server.getUserbyId)
+	router.GET("/user/id/:id", server.getUserbyId)
 	server.router = router
 	return server
 }
 
 
 func(server *Server) Start(address string) error {
-	return server.router.Run()
+	return server.router.Run(address)
 }
 
 func errorResponse(err error) gin.H{

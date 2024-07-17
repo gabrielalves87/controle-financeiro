@@ -10,9 +10,9 @@ import (
 
 
 type createUserRequest struct{
-	Username string `json:"username" binding:"reqired"` 
-	Password string `json:"password" binding:"reqired"`
-	Email    string `json:"email" binding:"reqired"`
+	Username string `json:"username" binding:"required"` 
+	Password string `json:"password" binding:"required"`
+	Email    string `json:"email" binding:"required"`
 	
 }
 
@@ -39,7 +39,7 @@ func(server *Server) createUser(ctx *gin.Context){
 
 
 type getUserRequest struct{
-	Username string `uri:"username" binding:"reqired"` 
+	Username string `uri:"username" binding:"required"` 
 }
 
 func(server *Server) getUser(ctx *gin.Context){
@@ -63,7 +63,7 @@ func(server *Server) getUser(ctx *gin.Context){
 
 
 type getUserbyIdRequest struct{
-	ID int32 `uri:"id" binding:"reqired"` 
+	ID int32 `uri:"id" binding:"required"` 
 }
 
 func(server *Server) getUserbyId(ctx *gin.Context){
