@@ -44,7 +44,7 @@ AND a.description like $5 and a.date = $6 ;
 
 -- name: UpdateAccount :one
 UPDATE accounts
-SET title = $2, description = $3
+SET title = $2, description = $3, value = $4
 WHERE id = $1
 RETURNING * ;
 

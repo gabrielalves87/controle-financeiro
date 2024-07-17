@@ -209,7 +209,7 @@ func (q *Queries) GetAccountsReports(ctx context.Context, arg GetAccountsReports
 
 const updateAccount = `-- name: UpdateAccount :one
 UPDATE accounts
-SET title = $2, description = $3
+SET title = $2, description = $3, value = $4
 WHERE id = $1
 RETURNING id, user_id, categories_id, title, type, description, value, date, created_at
 `
@@ -222,7 +222,12 @@ type UpdateAccountParams struct {
 }
 
 func (q *Queries) UpdateAccount(ctx context.Context, arg UpdateAccountParams) (Account, error) {
-	row := q.db.QueryRowContext(ctx, updateAccount, arg.ID, arg.Title, arg.Description)
+	row := q.db.QueryRowContext(ctx, updateAccount, 
+		arg.ID, 
+		arg.Title, 
+		arg.Description,
+		arg.Value,
+	)
 	var i Account
 	err := row.Scan(
 		&i.ID,
