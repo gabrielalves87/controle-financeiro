@@ -57,13 +57,13 @@ func (q *Queries) DeleteCategory(ctx context.Context, id int32) error {
 
 const getCategories = `-- name: GetCategories :many
 SELECT id, user_id, title, type, description, created_at FROM categories
-WHERE user_id = $1 AND type = $2 
-AND title LIKE $3 AND description like $4
+WHERE user_id = $1 OR type = $2 
+OR title LIKE $3 OR description like $4
 `
 
 type GetCategoriesParams struct {
 	UserID      int32       `json:"user_id"`
-	Type        string `json:"type"`
+	Type        string 		`json:"type"`
 	Title       string      `json:"title"`
 	Description string      `json:"description"`
 }
