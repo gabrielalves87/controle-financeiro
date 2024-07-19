@@ -26,9 +26,11 @@ func NewServer(store *db.SQLStore) *Server {
 
 	router.POST("/account", server.createAccount)
 	router.GET("/account/id/:id", server.getAccount)
+	router.GET("/account", server.getAccounts)
+	router.GET("/account/graph/:user_id/:type", server.getAccountGraph)
+	router.GET("/account/report/:user_id/:type", server.getAccountReport)
 	router.DELETE("/account/:id", server.deleteAccount)
 	router.PUT("/account/:id", server.updateAccount)
-	router.GET("/account/", server.getAccounts)
 	server.router = router
 	return server
 }
