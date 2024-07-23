@@ -24,11 +24,26 @@ func (server *Server) createAccount(ctx *gin.Context) {
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
+	var categoryID = req.CategoriesID
+	var accountType = req.Type
+	
+	category, err := server.store.GetCategory(ctx, categoryID)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, errorResponse(err))
+		return
+	}
+	categoryTypeIsDifferentofAccountType := category.Type != accountType
+	if categoryTypeIsDifferentofAccountType {
+		ctx.JSON(http.StatusBadRequest, "Account type different of Category type")
+		return
+	 }
+
+	
 	arg := db.CreateAccountParams{
 		UserID:       req.UserID,
-		CategoriesID: req.CategoriesID,
+		CategoriesID: categoryID,
 		Title:        req.Title,
-		Type:         req.Type,
+		Type:         accountType,
 		Description:  req.Description,
 		Value:        req.Value,
 		Date:         req.Date,
