@@ -36,11 +36,21 @@ a.value,
 a.date,
 a.created_at,
 c.title as category_title
-FROM accounts a
+FROM
+  accounts a
 LEFT JOIN categories c ON c.id = a.categories_id
-WHERE a.user_id = $1 AND a.type = $2 
-AND a.categories_id = $3 AND a.title LIKE $4
-AND a.description like $5 and a.date = $6 ;
+WHERE
+  a.user_id = @user_id
+AND
+  a.type = @type
+AND 
+  LOWER(a.title) LIKE CONCAT('%', LOWER(@title::text), '%')
+AND 
+  LOWER(a.description) LIKE CONCAT('%', LOWER(@description::text), '%') 
+AND 
+  a.categories_id = COALESCE(sqlc.narg('categories_id'),a.categories_id)
+AND 
+  a.date = COALESCE(sqlc.narg('date'),a.date);
 
 -- name: UpdateAccount :one
 UPDATE accounts
