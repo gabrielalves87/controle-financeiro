@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"database/sql"
 	// "database/sql"
 	"testing"
 	"time"
@@ -95,8 +96,14 @@ func TestListAccounts(t *testing.T) {
 	arg := GetAccountsParams{
 		UserID:       lastAccount.UserID,
 		Type:         lastAccount.Type,
-		CategoriesID: lastAccount.CategoriesID,
-		Date:         lastAccount.Date,
+		CategoriesID: sql.NullInt32{
+			Int32: lastAccount.CategoriesID,
+			Valid: true,
+		},
+		Date:         sql.NullTime{
+			Time: lastAccount.Date,
+			Valid: true,
+		},
 		Title:        lastAccount.Title,
 		Description:  lastAccount.Description,
 	}

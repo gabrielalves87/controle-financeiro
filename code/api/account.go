@@ -146,11 +146,17 @@ func (server *Server) getAccounts(ctx *gin.Context) {
 	}
 	arg := db.GetAccountsParams{
 		UserID:       req.UserID,
-		CategoriesID: req.CategoriesID,
+		CategoriesID: sql.NullInt32{
+			Int32: req.CategoriesID,
+			Valid: req.CategoriesID > 0,
+		},
 		Type:         req.Type,
 		Title:        req.Title,
 		Description:  req.Description,
-		Date:         req.Date,
+		Date:         sql.NullTime{
+			Time: req.Date,
+			Valid: !req.Date.IsZero(),
+		},
 	}
 	accounts, err := server.store.GetAccounts(ctx, arg)
 	if err != nil {
