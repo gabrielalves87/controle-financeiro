@@ -2,9 +2,11 @@ package api
 
 import (
 	"database/sql"
+	"log"
 	"net/http"
 
 	db "github.com/gabrielalves87/controle-financeiro/db/sqlc"
+	"github.com/gabrielalves87/controle-financeiro/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,8 +18,16 @@ type createCategoryRequest struct {
 }
 
 func (server *Server) createCategory(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 	var req createCategoryRequest
-	err := ctx.ShouldBindJSON(&req)
+	err = ctx.ShouldBindJSON(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -41,8 +51,16 @@ type getCategoryRequest struct {
 }
 
 func (server *Server) getCategory(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 	var req getCategoryRequest
-	err := ctx.ShouldBindUri(&req)
+	err = ctx.ShouldBindUri(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -64,8 +82,16 @@ type deleteCategoryRequest struct {
 }
 
 func (server *Server) deleteCategory(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 	var req deleteCategoryRequest
-	err := ctx.ShouldBindUri(&req)
+	err = ctx.ShouldBindUri(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -86,8 +112,16 @@ type updateCategoryRequest struct {
 }
 
 func (server *Server) updateCategory(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 	var req updateCategoryRequest
-	err := ctx.ShouldBindJSON(&req)
+	err = ctx.ShouldBindJSON(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -114,8 +148,12 @@ type getCategoriesRequest struct {
 }
 
 func (server *Server) getCategories(ctx *gin.Context) {
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+	}
 	var req getCategoriesRequest
-	err := ctx.ShouldBindJSON(&req)
+	err = ctx.ShouldBindJSON(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}

@@ -2,10 +2,12 @@ package api
 
 import (
 	"database/sql"
-	db "github.com/gabrielalves87/controle-financeiro/db/sqlc"
-	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 	"time"
+	"github.com/gabrielalves87/controle-financeiro/utils"
+	db "github.com/gabrielalves87/controle-financeiro/db/sqlc"
+	"github.com/gin-gonic/gin"
 )
 
 type createAccountRequest struct {
@@ -19,8 +21,16 @@ type createAccountRequest struct {
 }
 
 func (server *Server) createAccount(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 	var req createAccountRequest
-	err := ctx.ShouldBindJSON(&req)
+	err = ctx.ShouldBindJSON(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -63,8 +73,16 @@ type getAccountRequest struct {
 }
 
 func (server *Server) getAccount(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}	
 	var req getAccountRequest
-	err := ctx.ShouldBindUri(&req)
+	err = ctx.ShouldBindUri(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -86,8 +104,16 @@ type deleteAccountRequest struct {
 }
 
 func (server *Server) deleteAccount(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 	var req deleteAccountRequest
-	err := ctx.ShouldBindUri(&req)
+	err = ctx.ShouldBindUri(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -108,8 +134,16 @@ type updateAccountRequest struct {
 }
 
 func (server *Server) updateAccount(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}	
 	var req updateAccountRequest
-	err := ctx.ShouldBindJSON(&req)
+	err = ctx.ShouldBindJSON(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -139,8 +173,16 @@ type getAccountsRequest struct {
 }
 
 func (server *Server) getAccounts(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 	var req getAccountsRequest
-	err := ctx.ShouldBindJSON(&req)
+	err = ctx.ShouldBindJSON(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -177,8 +219,16 @@ type getAccountGraphRequest struct {
 }
 
 func (server *Server) getAccountGraph(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}	
 	var req getAccountGraphRequest
-	err := ctx.ShouldBindUri(&req)
+	err = ctx.ShouldBindUri(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
@@ -206,8 +256,16 @@ type getAccountReportRequest struct {
 }
 
 func (server *Server) getAccountReport(ctx *gin.Context) {
+	log.SetFlags(log.Ltime | log.Lshortfile)
+	err := utils.GetTokenAndVerify(ctx)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusBadRequest)
+		log.Println(err)
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}	
 	var req getAccountReportRequest
-	err := ctx.ShouldBindUri(&req)
+	err = ctx.ShouldBindUri(&req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
