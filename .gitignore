@@ -1,4 +1,6 @@
 /docker/data/*
 .idea
 .vscode
-.env
+backend/.env
+tmp
+frontend/node_modules
